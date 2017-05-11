@@ -17,5 +17,14 @@ namespace OrderManagement.BusinessLayer.Controllers
             var db = new OrderManagementContext();
             return db.Products.Where(p => p.Quantity > 0 && p.ProductName.Contains(name));
         }
+
+        public static void RemoveProductFromShelf(Product product, int quantity)
+        {
+            if (product.Quantity <= 0) return;
+            if (product.Quantity >= quantity)
+                product.Quantity -= quantity;
+            else
+                product.Quantity = 0;
+        }
     }
 }

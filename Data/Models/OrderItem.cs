@@ -7,7 +7,6 @@ namespace OrderManagement.Data.Models
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int OrderItemId { get; set; }
-        public int OrderId { get; set; }
         public Product Product { get; set; }
         public int Quantity { get; set; }
     }

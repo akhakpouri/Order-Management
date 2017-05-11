@@ -30,7 +30,8 @@ namespace OrderManagement.Data.Models
         [NotMapped]
         public string CreditCardNumber { get; set; }
         [NotMapped]
+        public string CardCode { get; set; }
+        [NotMapped]
         public string ExpirationDate { get; set; }
-        public string Token { get; set; }
     }
 }
