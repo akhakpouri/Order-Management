@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Reflection;
-using AuthorizeNet.Api.Contracts.V1;
 using log4net;
 using OrderManagement.Data.Models;
 using System.Linq;
@@ -14,18 +13,14 @@ namespace OrderManagement.BusinessLayer.Controllers
         {
             try
             {
-                var isCardAuthorized = CreditCardController.AuthorizeCreditCard(order.Customer.CreditCardNumber,
-                    order.Customer.ExpirationDate, order.Total);
+                var creditCardController = new CreditCardController();
                 var db = new OrderManagementContext();
-                if (isCardAuthorized.messages.resultCode == messageTypeEnum.Ok)
-                {
-                    var chargeResponse = CreditCardController.ChargeCreditCard(order);
-                    if (chargeResponse.messages.resultCode != messageTypeEnum.Ok) return;
-                    foreach (var lineItem in order.LineItems)
-                    {
-                        ProductController.RemoveProductFromShelf(lineItem.Product, lineItem.Quantity);
-                    }
-                }
+                var chargeResponse = creditCardController.ChargePayment(order.Customer.CreditCardNumber, order.GetTotal());
+
+
+                    
+                    
+                
                 db.SaveChanges();
             }
             catch (Exception ex)
