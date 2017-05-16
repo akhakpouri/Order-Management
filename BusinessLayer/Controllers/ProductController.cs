@@ -15,7 +15,7 @@ namespace OrderManagement.BusinessLayer.Controllers
             return db.Products.Where(p => p.Quantity > 0);
         }
 
-        public IEnumerable<Product> GetProductsByName(string name)
+        public static IEnumerable<Product> GetProductsByName(string name)
         {
             var db = new OrderManagementContext();
             return db.Products.Where(p => p.Quantity > 0 && p.ProductName.Contains(name));

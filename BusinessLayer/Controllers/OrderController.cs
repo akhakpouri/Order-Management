@@ -30,8 +30,10 @@ namespace OrderManagement.BusinessLayer.Controllers
                     {
                         ProductController.RemoveProductFromShelf(lineItem.Product, lineItem.Quantity);
                     }
-                    EmailController.SendEmail("noreply@shipping.com", order.Customer.EmailAddress,
+                    var emailSent = EmailController.SendEmail("noreply@shipping.com", order.Customer.EmailAddress,
                         "Order has been shipped.", "This is a body");
+                    if (!emailSent)
+                        Log.Error($"Email was not sent to {order.Customer.EmailAddress}");
                 }
                 db.SaveChanges();
             }

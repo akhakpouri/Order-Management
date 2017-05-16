@@ -6,8 +6,8 @@ namespace OrderManagement.Data.Models
     {
         public OrderManagementContext() : base("name=SiteSqlServer")
         {
-            Database.SetInitializer(
-                new DropCreateDatabaseIfModelChanges<OrderManagementContext>());
+            //Database.SetInitializer(
+            //    new DropCreateDatabaseIfModelChanges<OrderManagementContext>());
         }
 
         public DbSet<Product> Products { get; set; }
